@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acervo Digital - Memorial Virtual IFBA</title>
+    <meta name="description" content="Explore o acervo digital do Memorial IFBA. Fotos, documentos, vídeos e áudios históricos da instituição.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2D5A3D',
+                        'primary-light': '#3D7A52',
+                        'primary-dark': '#1D3A2A',
+                        'accent': '#722F37',
+                        'accent-light': '#8B3A44',
+                        'background': '#FAF8F5',
+                        'background-alt': '#F5F1EB',
+                        'text-dark': '#1A1A1A',
+                        'text-muted': '#666666',
+                        'border-light': '#E0DCD5',
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'Georgia', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- AOS - Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- GLightbox -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #FAF8F5; }
+        .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+        .btn-primary {
+            background-color: #2D5A3D;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #3D7A52;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 90, 61, 0.4);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid #2D5A3D;
+            color: #2D5A3D;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #2D5A3D;
+            color: white;
+        }
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background-color: #2D5A3D;
+            color: white;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        .badge-photo { background-color: #722F37; }
+        .badge-document { background-color: #2D5A3D; }
+        .badge-video { background-color: #2563eb; }
+        .badge-audio { background-color: #ea580c; }
+    </style>
+</head>
+<body class="bg-background text-text-dark">
+    
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
+                        <span class="text-white font-serif font-bold text-xl">M</span>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-xl text-primary">Memorial</span>
+                        <span class="block text-xs text-text-muted -mt-1">IFBA Virtual</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-text-muted hover:text-primary transition-colors">Início</a>
+                    <a href="archive.html" class="text-primary font-medium border-b-2 border-primary pb-1">Acervo</a>
+                    <a href="interviews.html" class="text-text-muted hover:text-primary transition-colors">Entrevistas</a>
+                    <a href="about.html" class="text-text-muted hover:text-primary transition-colors">Sobre</a>
+                    <a href="donate.html" class="text-text-muted hover:text-primary transition-colors">Contribuir</a>
+                </nav>
+                
+                <!-- Login Button -->
+                <div class="hidden md:block">
+                    <a href="#" class="btn-primary px-6 py-2.5 rounded-lg font-medium inline-flex items-center space-x-2">
+                        <i data-lucide="log-in" class="w-4 h-4"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                    <i data-lucide="menu" class="w-6 h-6 text-primary"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-border-light">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block py-2 text-text-muted hover:text-primary">Início</a>
+                <a href="archive.html" class="block py-2 text-primary font-medium">Acervo</a>
+                <a href="interviews.html" class="block py-2 text-text-muted hover:text-primary">Entrevistas</a>
+                <a href="about.html" class="block py-2 text-text-muted hover:text-primary">Sobre</a>
+                <a href="donate.html" class="block py-2 text-text-muted hover:text-primary">Contribuir</a>
+                <a href="#" class="btn-primary px-6 py-2.5 rounded-lg font-medium inline-flex items-center space-x-2 mt-4">
+                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                    <span>Login</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="py-16 bg-background-alt">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center" data-aos="fade-up">
+                    <span class="text-primary font-medium text-sm tracking-wider uppercase">Explore Nossa Coleção</span>
+                    <h1 class="font-serif text-4xl md:text-5xl font-bold text-text-dark mt-4 mb-6">
+                        Acervo Digital
+                    </h1>
+                    <p class="text-text-muted text-lg max-w-2xl mx-auto">
+                        Explore nossa coleção de fotografias, documentos históricos, vídeos e áudios que preservam a memória do IFBA.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="py-8 bg-white sticky top-20 z-40 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <!-- Filter Buttons -->
+                    <div class="flex flex-wrap gap-2" id="filter-buttons">
+                        <button class="filter-btn active px-5 py-2.5 rounded-full text-sm font-medium bg-gray-100 text-text-muted hover:bg-primary hover:text-white" data-filter="all">
+                            Todos
+                        </button>
+                        <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-gray-100 text-text-muted hover:bg-primary hover:text-white" data-filter="photo">
+                            📷 Fotos
+                        </button>
+                        <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-gray-100 text-text-muted hover:bg-primary hover:text-white" data-filter="document">
+                            📄 Documentos
+                        </button>
+                        <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-gray-100 text-text-muted hover:bg-primary hover:text-white" data-filter="video">
+                            🎬 Vídeos
+                        </button>
+                        <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-medium bg-gray-100 text-text-muted hover:bg-primary hover:text-white" data-filter="audio">
+                            🎧 Áudios
+                        </button>
+                    </div>
+                    
+                    <!-- Search -->
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="search-input"
+                            placeholder="Buscar no acervo..." 
+                            class="w-full md:w-72 pl-10 pr-4 py-2.5 rounded-lg border border-border-light focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                        >
+                        <i data-lucide="search" class="w-5 h-5 text-text-muted absolute left-3 top-1/2 -translate-y-1/2"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Grid -->
+        <section class="py-16 bg-background">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Results Count -->
+                <div class="flex items-center justify-between mb-8">
+                    <p class="text-text-muted" id="results-count">Mostrando <strong class="text-text-dark">12</strong> itens</p>
+                    <select class="px-4 py-2 rounded-lg border border-border-light focus:border-primary outline-none text-sm">
+                        <option>Mais recentes</option>
+                        <option>Mais antigos</option>
+                        <option>A-Z</option>
+                    </select>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="gallery-grid">
+                    
+                    <!-- Card 1 - Photo -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="photo" data-aos="fade-up" data-aos-delay="0">
+                        <a href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&q=80" class="glightbox" data-gallery="gallery1">
+                            <div class="relative h-48 overflow-hidden">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&q=80" 
+                                    alt="Foto histórica 1" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                >
+                                <span class="absolute top-3 right-3 badge-photo text-white text-xs font-medium px-3 py-1 rounded-full">
+                                    📷 Foto
+                                </span>
+                            </div>
+                        </a>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2008</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Celebração dos 100 Anos de Educação Técnica
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Evento comemorativo do centenário da educação profissional.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 - Document -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="document" data-aos="fade-up" data-aos-delay="50">
+                        <a href="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1200&q=80" class="glightbox" data-gallery="gallery1">
+                            <div class="relative h-48 overflow-hidden">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&q=80" 
+                                    alt="Documento histórico" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                >
+                                <span class="absolute top-3 right-3 badge-document text-white text-xs font-medium px-3 py-1 rounded-full">
+                                    📄 Documento
+                                </span>
+                            </div>
+                        </a>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2006</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Ata de Criação do Instituto Federal
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Documento oficial de fundação do IFBA.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 - Video -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="video" data-aos="fade-up" data-aos-delay="100">
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="glightbox" data-gallery="gallery1">
+                            <div class="relative h-48 overflow-hidden">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" 
+                                    alt="Vídeo institucional" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                >
+                                <span class="absolute top-3 right-3 badge-video text-white text-xs font-medium px-3 py-1 rounded-full">
+                                    🎬 Vídeo
+                                </span>
+                                <!-- Play Button Overlay -->
+                                <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+                                    <div class="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center">
+                                        <i data-lucide="play" class="w-6 h-6 text-primary ml-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2015</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Semana Nacional de Ciência e Tecnologia
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Registro audiovisual das apresentações estudantis.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 4 - Audio -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="audio" data-aos="fade-up" data-aos-delay="150">
+                        <div class="relative h-48 overflow-hidden bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <i data-lucide="mic" class="w-12 h-12 mx-auto mb-2"></i>
+                                <span class="text-sm font-medium">Áudio • 12:45</span>
+                            </div>
+                            <span class="absolute top-3 right-3 badge-audio text-white text-xs font-medium px-3 py-1 rounded-full">
+                                🎧 Áudio
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2010</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Entrevista com Professores Fundadores
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Depoimentos sobre os primeiros anos.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 5 - Photo -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="photo" data-aos="fade-up" data-aos-delay="200">
+                        <a href="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=80" class="glightbox" data-gallery="gallery1">
+                            <div class="relative h-48 overflow-hidden">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&q=80" 
+                                    alt="Foto histórica 2" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                >
+                                <span class="absolute top-3 right-3 badge-photo text-white text-xs font-medium px-3 py-1 rounded-full">
+                                    📷 Foto
+                                </span>
+                            </div>
+                        </a>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2012</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Formação Turma de Engenharia
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Cerimônia de colocação de grau dos engenheiros.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 6 - Document -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="document" data-aos="fade-up" data-aos-delay="250">
+                        <a href="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200&q=80" class="glightbox" data-gallery="gallery1">
+                            <div class="relative h-48 overflow-hidden">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&q=80" 
+                                    alt="Documento acadêmico" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                >
+                                <span class="absolute top-3 right-3 badge-document text-white text-xs font-medium px-3 py-1 rounded-full">
+                                    📄 Documento
+                                </span>
+                            </div>
+                        </a>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2018</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Projeto Pedagógico Institucional
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Registros acadêmicos importantes.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 7 - Photo -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="photo" data-aos="fade-up" data-aos-delay="300">
+                        <a href="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&q=80" class="glightbox" data-gallery="gallery1">
+                            <div class="relative h-48 overflow-hidden">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&q=80" 
+                                    alt="Foto de aula" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                >
+                                <span class="absolute top-3 right-3 badge-photo text-white text-xs font-medium px-3 py-1 rounded-full">
+                                    📷 Foto
+                                </span>
+                            </div>
+                        </a>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2016</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Aula Prática nos Laboratórios
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Estudantes em atividades experimentais.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 8 - Video -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="video" data-aos="fade-up" data-aos-delay="350">
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="glightbox" data-gallery="gallery1">
+                            <div class="relative h-48 overflow-hidden">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=400&q=80" 
+                                    alt="Vídeo de evento" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                >
+                                <span class="absolute top-3 right-3 badge-video text-white text-xs font-medium px-3 py-1 rounded-full">
+                                    🎬 Vídeo
+                                </span>
+                                <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+                                    <div class="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center">
+                                        <i data-lucide="play" class="w-6 h-6 text-primary ml-1"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2020</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Aula Inaugural do Semestre Remoto
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Adaptação ao ensino durante a pandemia.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 9 - Audio -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="audio" data-aos="fade-up" data-aos-delay="400">
+                        <div class="relative h-48 overflow-hidden bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <i data-lucide="mic" class="w-12 h-12 mx-auto mb-2"></i>
+                                <span class="text-sm font-medium">Áudio • 08:32</span>
+                            </div>
+                            <span class="absolute top-3 right-3 badge-audio text-white text-xs font-medium px-3 py-1 rounded-full">
+                                🎧 Áudio
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2014</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Podcast: Histórias do Campus
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Relatos de ex-alunos sobre suas vivências.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 10 - Photo -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="photo" data-aos="fade-up" data-aos-delay="450">
+                        <a href="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1200&q=80" class="glightbox" data-gallery="gallery1">
+                            <div class="relative h-48 overflow-hidden">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&q=80" 
+                                    alt="Foto de estudantes" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                >
+                                <span class="absolute top-3 right-3 badge-photo text-white text-xs font-medium px-3 py-1 rounded-full">
+                                    📷 Foto
+                                </span>
+                            </div>
+                        </a>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2019</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Jogos Estudantis IFBA
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Competições esportivas entre os campi.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 11 - Document -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="document" data-aos="fade-up" data-aos-delay="500">
+                        <a href="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80" class="glightbox" data-gallery="gallery1">
+                            <div class="relative h-48 overflow-hidden">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&q=80" 
+                                    alt="Documento de pesquisa" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                >
+                                <span class="absolute top-3 right-3 badge-document text-white text-xs font-medium px-3 py-1 rounded-full">
+                                    📄 Documento
+                                </span>
+                            </div>
+                        </a>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2021</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Relatório de Pesquisa e Extensão
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Publicações científicas da instituição.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 12 - Photo -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md gallery-item" data-type="photo" data-aos="fade-up" data-aos-delay="550">
+                        <a href="https://images.unsplash.com/photo-1562774053-701939374585?w=1200&q=80" class="glightbox" data-gallery="gallery1">
+                            <div class="relative h-48 overflow-hidden">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1562774053-701939374585?w=400&q=80" 
+                                    alt="Foto do campus" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                >
+                                <span class="absolute top-3 right-3 badge-photo text-white text-xs font-medium px-3 py-1 rounded-full">
+                                    📷 Foto
+                                </span>
+                            </div>
+                        </a>
+                        <div class="p-5">
+                            <span class="text-text-muted text-sm">2023</span>
+                            <h3 class="font-serif text-lg font-semibold text-text-dark mt-1 mb-2 line-clamp-2">
+                                Vista Aérea do Campus Salvador
+                            </h3>
+                            <p class="text-text-muted text-sm line-clamp-2">
+                                Registro fotográfico da infraestrutura atual.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center items-center space-x-2 mt-12">
+                    <button class="p-2 rounded-lg border border-border-light hover:border-primary hover:text-primary transition-colors" disabled>
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <button class="w-10 h-10 rounded-lg bg-primary text-white font-medium">1</button>
+                    <button class="w-10 h-10 rounded-lg border border-border-light hover:border-primary hover:text-primary transition-colors font-medium">2</button>
+                    <button class="w-10 h-10 rounded-lg border border-border-light hover:border-primary hover:text-primary transition-colors font-medium">3</button>
+                    <span class="px-2 text-text-muted">...</span>
+                    <button class="w-10 h-10 rounded-lg border border-border-light hover:border-primary hover:text-primary transition-colors font-medium">12</button>
+                    <button class="p-2 rounded-lg border border-border-light hover:border-primary hover:text-primary transition-colors">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 bg-primary-dark">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div data-aos="fade-up">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+                        Tem algo para contribuir?
+                    </h2>
+                    <p class="text-white/80 text-lg mb-8">
+                        Ajude-nos a preservar a história do IFBA. Suas fotografias, documentos e memórias são valiosas para nós.
+                    </p>
+                    <a href="donate.html" class="bg-white text-primary px-8 py-3.5 rounded-xl font-semibold inline-flex items-center space-x-2 hover:bg-background-alt transition-all">
+                        <i data-lucide="upload" class="w-5 h-5"></i>
+                        <span>Contribua com o Acervo</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Main Footer -->
+            <div class="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-serif font-bold text-xl">M</span>
+                        </div>
+                        <div>
+                            <span class="font-serif font-bold text-xl">Memorial</span>
+                            <span class="block text-xs text-white/70 -mt-1">IFBA Virtual</span>
+                        </div>
+                    </a>
+                    <p class="text-white/70 text-sm leading-relaxed">
+                        Um projeto do Núcleo de Arte e Cultura dedicado à preservação da memória institucional do IFBA.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Links Rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="archive.html" class="text-white/70 hover:text-white transition-colors">Acervo Digital</a></li>
+                        <li><a href="about.html" class="text-white/70 hover:text-white transition-colors">Linha do Tempo</a></li>
+                        <li><a href="about.html" class="text-white/70 hover:text-white transition-colors">Sobre o Memorial</a></li>
+                        <li><a href="interviews.html" class="text-white/70 hover:text-white transition-colors">Entrevistas</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Contato</h4>
+                    <ul class="space-y-3 text-white/70 text-sm">
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 mt-0.5 flex-shrink-0"></i>
+                            <span>Rua Emídio dos Santos, S/N<br>Salvador, BA - 40301-015</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="mail" class="w-5 h-5 flex-shrink-0"></i>
+                            <a href="mailto:memorial@ifba.edu.br" class="hover:text-white transition-colors">memorial@ifba.edu.br</a>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="phone" class="w-5 h-5 flex-shrink-0"></i>
+                            <span>(71) 1234-5678</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Institucional</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Acessibilidade</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Termos de Uso</a></li>
+                        <li><a href="donate.html" class="text-white/70 hover:text-white transition-colors">Contribuir</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="py-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm text-white/60">
+                <p>&copy; 2026 Memorial Virtual IFBA. Todos os direitos reservados.</p>
+                <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="youtube" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            offset: 100,
+        });
+        
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Initialize GLightbox
+        const lightbox = GLightbox({
+            touchNavigation: true,
+            loop: true,
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const resultsCount = document.getElementById('results-count');
+        
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                let visibleCount = 0;
+                
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.type === filter) {
+                        item.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                resultsCount.innerHTML = `Mostrando <strong class="text-text-dark">${visibleCount}</strong> itens`;
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            let visibleCount = 0;
+            
+            galleryItems.forEach(item => {
+                const title = item.querySelector('h3').textContent.toLowerCase();
+                const description = item.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            resultsCount.innerHTML = `Mostrando <strong class="text-text-dark">${visibleCount}</strong> itens`;
+        });
+    </script>
+</body>
+</html>

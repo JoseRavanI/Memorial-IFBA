@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorial Virtual IFBA - Memórias Vivas</title>
+    <meta name="description" content="Memorial Virtual IFBA - Preservando memórias, cultura e história da educação pública.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2D5A3D',
+                        'primary-light': '#3D7A52',
+                        'primary-dark': '#1D3A2A',
+                        'accent': '#722F37',
+                        'accent-light': '#8B3A44',
+                        'background': '#FAF8F5',
+                        'background-alt': '#F5F1EB',
+                        'text-dark': '#1A1A1A',
+                        'text-muted': '#666666',
+                        'border-light': '#E0DCD5',
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'Georgia', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F5F1EB; }
+        ::-webkit-scrollbar-thumb { background: #2D5A3D; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #1D3A2A; }
+        
+        /* Button hover effects */
+        .btn-primary {
+            background: linear-gradient(135deg, #2D5A3D 0%, #3D7A52 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(45, 90, 61, 0.3);
+        }
+        .btn-secondary {
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #2D5A3D;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Card hover */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        /* Hero overlay */
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(29, 58, 42, 0.85) 0%, rgba(45, 90, 61, 0.7) 100%);
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-background text-text-dark">
+    
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
+                        <span class="text-white font-serif font-bold text-xl">M</span>
+                    </div>
+                    <div>
+                        <span class="font-serif text-xl font-semibold text-primary-dark">Memorial Virtual</span>
+                        <span class="block text-xs text-text-muted tracking-wider">IFBA / NAC</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-primary font-medium border-b-2 border-primary pb-1">Início</a>
+                    <a href="archive.html" class="text-text-muted hover:text-primary transition-colors">Acervo</a>
+                    <a href="interviews.html" class="text-text-muted hover:text-primary transition-colors">Entrevistas</a>
+                    <a href="about.html" class="text-text-muted hover:text-primary transition-colors">Sobre</a>
+                    <a href="donate.html" class="text-text-muted hover:text-primary transition-colors">Contribuir</a>
+                </nav>
+                
+                <!-- Login Button -->
+                <div class="hidden md:block">
+                    <a href="#" class="btn-primary px-6 py-2.5 text-white rounded-lg font-medium inline-flex items-center space-x-2">
+                        <i data-lucide="log-in" class="w-4 h-4"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-primary">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-80 h-full bg-background shadow-2xl md:hidden z-50">
+            <div class="p-6">
+                <button id="mobile-menu-close" class="absolute top-6 right-6 text-text-muted hover:text-primary">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <nav class="mt-12 space-y-6">
+                    <a href="index.html" class="block text-lg font-medium text-primary">Início</a>
+                    <a href="archive.html" class="block text-lg text-text-muted hover:text-primary">Acervo</a>
+                    <a href="interviews.html" class="block text-lg text-text-muted hover:text-primary">Entrevistas</a>
+                    <a href="about.html" class="block text-lg text-text-muted hover:text-primary">Sobre</a>
+                    <a href="donate.html" class="block text-lg text-text-muted hover:text-primary">Contribuir</a>
+                    <a href="#" class="btn-primary px-6 py-3 text-white rounded-lg font-medium inline-flex items-center space-x-2 mt-6">
+                        <i data-lucide="log-in" class="w-4 h-4"></i>
+                        <span>Login</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center pt-20">
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+                     alt="Campus IFBA" 
+                     class="w-full h-full object-cover">
+                <div class="hero-overlay absolute inset-0"></div>
+            </div>
+            
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="max-w-3xl" data-aos="fade-up" data-aos-duration="1000">
+                    <span class="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium mb-6">
+                        Preservando nossa história desde 2006
+                    </span>
+                    <h1 class="font-serif text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                        Memórias Vivas
+                    </h1>
+                    <p class="text-xl md:text-2xl text-white/90 mb-10 leading-relaxed">
+                        Um espaço dedicado à preservação da memória, cultura e história do Instituto Federal da Bahia. 
+                        Explore décadas de educação, inovação e transformação social.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="archive.html" class="btn-primary px-8 py-4 text-white rounded-xl font-semibold text-lg inline-flex items-center justify-center space-x-3">
+                            <i data-lucide="archive" class="w-5 h-5"></i>
+                            <span>Explorar o Acervo</span>
+                        </a>
+                        <a href="interviews.html" class="btn-secondary bg-white/10 backdrop-blur-sm border-2 border-white/30 px-8 py-4 text-white rounded-xl font-semibold text-lg inline-flex items-center justify-center space-x-3 hover:bg-white hover:text-primary">
+                            <i data-lucide="play-circle" class="w-5 h-5"></i>
+                            <span>Assistir Entrevistas</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/70 animate-bounce">
+                <i data-lucide="chevron-down" class="w-8 h-8"></i>
+            </div>
+        </section>
+        
+        <!-- Institutional Section -->
+        <section class="py-24 bg-background">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div data-aos="fade-right" data-aos-duration="800">
+                        <span class="text-primary font-medium text-sm uppercase tracking-wider">Sobre o Memorial</span>
+                        <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary-dark mt-4 mb-6 leading-tight">
+                            Uma janela para o passado, uma inspiração para o futuro
+                        </h2>
+                        <p class="text-text-muted text-lg leading-relaxed mb-8">
+                            O Memorial Virtual IFBA é um projeto dedicado à preservação e difusão da memória institucional do Instituto Federal da Bahia. Aqui, reunimos fotografias, documentos, entrevistas e registros audiovisuais que contam a trajetória de uma instituição centenária comprometida com a educação pública de qualidade.
+                        </p>
+                        <p class="text-text-muted text-lg leading-relaxed mb-8">
+                            Cada registro aqui preservado representa um capítulo da nossa história, celebrando as conquistas de estudantes, professores e servidores que transformaram vidas através da educação.
+                        </p>
+                        <a href="about.html" class="inline-flex items-center space-x-2 text-primary font-semibold hover:text-primary-dark transition-colors">
+                            <span>Conheça nossa história</span>
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="relative" data-aos="fade-left" data-aos-duration="800">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Estudantes IFBA" 
+                             class="rounded-2xl shadow-2xl w-full">
+                        
+                        <!-- Stats Card -->
+                        <div class="absolute -bottom-8 -left-8 bg-white rounded-2xl shadow-xl p-6 max-w-xs">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center">
+                                    <i data-lucide="calendar" class="w-7 h-7 text-primary"></i>
+                                </div>
+                                <div>
+                                    <span class="font-serif text-3xl font-bold text-primary-dark">15+</span>
+                                    <p class="text-text-muted text-sm">anos de história documentada</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Archive Highlights -->
+        <section class="py-24 bg-background-alt">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <span class="text-primary font-medium text-sm uppercase tracking-wider">Destaques</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary-dark mt-4 mb-6">
+                        Explore o Acervo
+                    </h2>
+                    <p class="text-text-muted text-lg max-w-2xl mx-auto">
+                        Navegue por uma coleção cuidadosamente organizada de registros históricos que revelam a rica trajetória do IFBA ao longo das décadas.
+                    </p>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                                 alt="Documento histórico" 
+                                 class="w-full h-56 object-cover">
+                            <span class="absolute top-4 left-4 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                Documento
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-text-muted text-sm">1985</span>
+                            <h3 class="font-serif text-xl font-semibold text-primary-dark mt-2 mb-3">
+                                Ata de Fundação do Campus
+                            </h3>
+                            <p class="text-text-muted text-sm leading-relaxed">
+                                Documento original que marca o início da nossa trajetória educacional.
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Card 2 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                                 alt="Foto histórica" 
+                                 class="w-full h-56 object-cover">
+                            <span class="absolute top-4 left-4 bg-accent text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                Foto
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-text-muted text-sm">1992</span>
+                            <h3 class="font-serif text-xl font-semibold text-primary-dark mt-2 mb-3">
+                                Primeira Turma de Formandos
+                            </h3>
+                            <p class="text-text-muted text-sm leading-relaxed">
+                                Registro emocionante dos primeiros estudantes a concluir o curso.
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Card 3 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                                 alt="Vídeo institucional" 
+                                 class="w-full h-56 object-cover">
+                            <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                Vídeo
+                            </span>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center">
+                                    <i data-lucide="play" class="w-8 h-8 text-primary ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-text-muted text-sm">2010</span>
+                            <h3 class="font-serif text-xl font-semibold text-primary-dark mt-2 mb-3">
+                                Inauguração do Novo Pavilhão
+                            </h3>
+                            <p class="text-text-muted text-sm leading-relaxed">
+                                Cerimônia que marcou a expansão da infraestrutura do campus.
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Card 4 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                                 alt="Áudio entrevista" 
+                                 class="w-full h-56 object-cover">
+                            <span class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                Áudio
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-text-muted text-sm">2015</span>
+                            <h3 class="font-serif text-xl font-semibold text-primary-dark mt-2 mb-3">
+                                Entrevista com Ex-Diretor
+                            </h3>
+                            <p class="text-text-muted text-sm leading-relaxed">
+                                Depoimento sobre os desafios e conquistas da gestão institucional.
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Card 5 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="500">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                                 alt="Foto eventos" 
+                                 class="w-full h-56 object-cover">
+                            <span class="absolute top-4 left-4 bg-accent text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                Foto
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-text-muted text-sm">2018</span>
+                            <h3 class="font-serif text-xl font-semibold text-primary-dark mt-2 mb-3">
+                                Semana de Ciência e Tecnologia
+                            </h3>
+                            <p class="text-text-muted text-sm leading-relaxed">
+                                Momentos marcantes da feira que celebra a inovação estudantil.
+                            </p>
+                        </div>
+                    </article>
+                    
+                    <!-- Card 6 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="600">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                                 alt="Documento histórico" 
+                                 class="w-full h-56 object-cover">
+                            <span class="absolute top-4 left-4 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                Documento
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-text-muted text-sm">2020</span>
+                            <h3 class="font-serif text-xl font-semibold text-primary-dark mt-2 mb-3">
+                                Projeto Pedagógico Atualizado
+                            </h3>
+                            <p class="text-text-muted text-sm leading-relaxed">
+                                Documento que define as diretrizes educacionais da instituição.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="text-center mt-12" data-aos="fade-up">
+                    <a href="archive.html" class="inline-flex items-center space-x-2 text-primary font-semibold text-lg hover:text-primary-dark transition-colors">
+                        <span>Ver todo o acervo</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="py-24 bg-primary relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <img src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+                     alt="" 
+                     class="w-full h-full object-cover">
+            </div>
+            <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+                <div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-8">
+                    <i data-lucide="heart" class="w-10 h-10 text-white"></i>
+                </div>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
+                    Contribua com o Acervo
+                </h2>
+                <p class="text-white/90 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Você possui fotos, documentos ou memórias do IFBA? Compartilhe conosco e ajude a preservar nossa história para as futuras gerações.
+                </p>
+                <a href="donate.html" class="inline-flex items-center space-x-3 bg-white text-primary px-8 py-4 rounded-xl font-semibold text-lg hover:bg-background-alt transition-colors">
+                    <i data-lucide="upload" class="w-5 h-5"></i>
+                    <span>Contribua com o acervo</span>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid md:grid-cols-4 gap-12">
+                <!-- Logo & Description -->
+                <div class="md:col-span-2">
+                    <a href="index.html" class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-serif font-bold text-xl">M</span>
+                        </div>
+                        <div>
+                            <span class="font-serif text-xl font-semibold">Memorial Virtual</span>
+                            <span class="block text-xs text-white/70 tracking-wider">IFBA / NAC</span>
+                        </div>
+                    </a>
+                    <p class="text-white/70 leading-relaxed mb-6 max-w-md">
+                        Um projeto do Núcleo de Arte e Cultura dedicado à preservação da memória institucional. Conectando gerações através da história e cultura do Instituto Federal da Bahia.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i data-lucide="youtube" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Links -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Links Rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="archive.html" class="text-white/70 hover:text-white transition-colors">Acervo Digital</a></li>
+                        <li><a href="about.html" class="text-white/70 hover:text-white transition-colors">Linha do Tempo</a></li>
+                        <li><a href="interviews.html" class="text-white/70 hover:text-white transition-colors">Entrevistas</a></li>
+                        <li><a href="about.html" class="text-white/70 hover:text-white transition-colors">Sobre o Memorial</a></li>
+                        <li><a href="donate.html" class="text-white/70 hover:text-white transition-colors">Contribuir</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Contato</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-white/50 mt-0.5"></i>
+                            <span class="text-white/70">Rua Emídio dos Santos, S/N<br>Salvador - BA, 40301-015</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="mail" class="w-5 h-5 text-white/50"></i>
+                            <a href="mailto:memorial@ifba.edu.br" class="text-white/70 hover:text-white transition-colors">memorial@ifba.edu.br</a>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="phone" class="w-5 h-5 text-white/50"></i>
+                            <span class="text-white/70">(71) 1234-5678</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-white/50 text-sm">
+                    © 2024 Memorial Virtual IFBA. Todos os direitos reservados.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-white/50 hover:text-white text-sm transition-colors">Acessibilidade</a>
+                    <a href="#" class="text-white/50 hover:text-white text-sm transition-colors">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-primary text-white rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary-dark flex items-center justify-center z-40">
+        <i data-lucide="chevron-up" class="w-6 h-6"></i>
+    </button>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            duration: 800,
+            easing: 'ease-out-cubic'
+        });
+        
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn?.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+        
+        mobileMenuClose?.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+        
+        // Back to top button
+        const backToTop = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTop?.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Header scroll effect
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrevista: José Roberto Silva - Memorial Virtual IFBA</title>
+    <meta name="description" content="Ouça a entrevista completa com José Roberto Silva, professor e ex-diretor do IFBA.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2D5A3D',
+                        'primary-light': '#3D7A52',
+                        'primary-dark': '#1D3A2A',
+                        'accent': '#722F37',
+                        'accent-light': '#8B3A44',
+                        'background': '#FAF8F5',
+                        'background-alt': '#F5F1EB',
+                        'text-dark': '#1A1A1A',
+                        'text-muted': '#666666',
+                        'border-light': '#E0DCD5',
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'Georgia', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- AOS - Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #FAF8F5; }
+        .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+        .btn-primary {
+            background-color: #2D5A3D;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #3D7A52;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 90, 61, 0.4);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid #2D5A3D;
+            color: #2D5A3D;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #2D5A3D;
+            color: white;
+        }
+        
+        /* Custom Audio Player Styles */
+        .audio-player {
+            background: linear-gradient(135deg, #2D5A3D 0%, #1D3A2A 100%);
+        }
+        
+        .audio-progress {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+        
+        .audio-progress::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .audio-progress::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-dark">
+    
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
+                        <span class="text-white font-serif font-bold text-xl">M</span>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-xl text-primary">Memorial</span>
+                        <span class="block text-xs text-text-muted -mt-1">IFBA Virtual</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-text-muted hover:text-primary transition-colors">Início</a>
+                    <a href="archive.html" class="text-text-muted hover:text-primary transition-colors">Acervo</a>
+                    <a href="interviews.html" class="text-primary font-medium border-b-2 border-primary pb-1">Entrevistas</a>
+                    <a href="about.html" class="text-text-muted hover:text-primary transition-colors">Sobre</a>
+                    <a href="donate.html" class="text-text-muted hover:text-primary transition-colors">Contribuir</a>
+                </nav>
+                
+                <!-- Login Button -->
+                <div class="hidden md:block">
+                    <a href="#" class="btn-primary px-6 py-2.5 rounded-lg font-medium inline-flex items-center space-x-2">
+                        <i data-lucide="log-in" class="w-4 h-4"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                    <i data-lucide="menu" class="w-6 h-6 text-primary"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-border-light">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block py-2 text-text-muted hover:text-primary">Início</a>
+                <a href="archive.html" class="block py-2 text-text-muted hover:text-primary">Acervo</a>
+                <a href="interviews.html" class="block py-2 text-primary font-medium">Entrevistas</a>
+                <a href="about.html" class="block py-2 text-text-muted hover:text-primary">Sobre</a>
+                <a href="donate.html" class="block py-2 text-text-muted hover:text-primary">Contribuir</a>
+                <a href="#" class="btn-primary px-6 py-2.5 rounded-lg font-medium inline-flex items-center space-x-2 mt-4">
+                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                    <span>Login</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Breadcrumb -->
+        <section class="py-4 bg-background-alt border-b border-border-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex items-center space-x-2 text-sm">
+                    <a href="index.html" class="text-text-muted hover:text-primary transition-colors">Início</a>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-text-muted"></i>
+                    <a href="interviews.html" class="text-text-muted hover:text-primary transition-colors">Entrevistas</a>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-text-muted"></i>
+                    <span class="text-primary font-medium">José Roberto Silva</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Interview Content -->
+        <section class="py-16 bg-background">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-5 gap-12">
+                    
+                    <!-- Left Column - Photo & Info -->
+                    <div class="lg:col-span-2" data-aos="fade-right">
+                        <div class="sticky top-28">
+                            <!-- Photo -->
+                            <div class="relative mb-8">
+                                <div class="aspect-square rounded-2xl overflow-hidden shadow-xl">
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80" 
+                                        alt="José Roberto Silva" 
+                                        class="w-full h-full object-cover"
+                                    >
+                                </div>
+                                <!-- Badge -->
+                                <div class="absolute -bottom-4 -right-4 bg-primary text-white px-4 py-2 rounded-xl shadow-lg">
+                                    <div class="flex items-center space-x-2">
+                                        <i data-lucide="mic" class="w-4 h-4"></i>
+                                        <span class="font-medium text-sm">Entrevista</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Info Card -->
+                            <div class="bg-white rounded-2xl p-6 shadow-md">
+                                <h2 class="font-serif text-2xl font-bold text-text-dark mb-2">
+                                    José Roberto Silva
+                                </h2>
+                                <p class="text-primary font-medium mb-4">
+                                    Professor de História • Ex-Diretor
+                                </p>
+                                
+                                <div class="space-y-3 text-sm text-text-muted">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                                        <span>Entrevistado em 15 de março de 2023</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <i data-lucide="clock" class="w-4 h-4"></i>
+                                        <span>Duração: 15 minutos e 30 segundos</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <i data-lucide="user" class="w-4 h-4"></i>
+                                        <span>Entrevistador: Maria Helena Santos</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Share Buttons -->
+                                <div class="mt-6 pt-6 border-t border-border-light">
+                                    <p class="text-sm text-text-muted mb-3">Compartilhar:</p>
+                                    <div class="flex space-x-3">
+                                        <button class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors">
+                                            <i data-lucide="facebook" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="w-10 h-10 bg-sky-500 text-white rounded-lg flex items-center justify-center hover:bg-sky-600 transition-colors">
+                                            <i data-lucide="twitter" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="w-10 h-10 bg-green-600 text-white rounded-lg flex items-center justify-center hover:bg-green-700 transition-colors">
+                                            <i data-lucide="share-2" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="w-10 h-10 bg-gray-600 text-white rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors">
+                                            <i data-lucide="link" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Audio Player & Content -->
+                    <div class="lg:col-span-3" data-aos="fade-left">
+                        
+                        <!-- Audio Player -->
+                        <div class="audio-player rounded-2xl p-8 mb-8 shadow-xl">
+                            <h3 class="text-white text-xl font-semibold mb-6 flex items-center space-x-3">
+                                <i data-lucide="headphones" class="w-6 h-6"></i>
+                                <span>Reproduzir Entrevista</span>
+                            </h3>
+                            
+                            <!-- Hidden Audio Element -->
+                            <audio id="audio-player" preload="metadata">
+                                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                                Seu navegador não suporta o elemento de áudio.
+                            </audio>
+                            
+                            <!-- Progress Bar -->
+                            <div class="mb-4">
+                                <input type="range" id="progress-bar" class="audio-progress" value="0" min="0" max="100">
+                                <div class="flex justify-between text-white/70 text-sm mt-2">
+                                    <span id="current-time">0:00</span>
+                                    <span id="duration">0:00</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Controls -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <!-- Rewind -->
+                                    <button id="rewind-btn" class="w-10 h-10 bg-white/20 text-white rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                                        <i data-lucide="rewind" class="w-5 h-5"></i>
+                                    </button>
+                                    
+                                    <!-- Play/Pause -->
+                                    <button id="play-btn" class="w-16 h-16 bg-white text-primary rounded-full flex items-center justify-center hover:scale-105 transition-transform shadow-lg">
+                                        <i data-lucide="play" class="w-7 h-7 ml-1" id="play-icon"></i>
+                                    </button>
+                                    
+                                    <!-- Forward -->
+                                    <button id="forward-btn" class="w-10 h-10 bg-white/20 text-white rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                                        <i data-lucide="fast-forward" class="w-5 h-5"></i>
+                                    </button>
+                                </div>
+                                
+                                <!-- Volume -->
+                                <div class="flex items-center space-x-3">
+                                    <button id="mute-btn" class="text-white/80 hover:text-white">
+                                        <i data-lucide="volume-2" class="w-5 h-5" id="volume-icon"></i>
+                                    </button>
+                                    <input type="range" id="volume-slider" class="volume-slider" value="100" min="0" max="100">
+                                </div>
+                                
+                                <!-- Speed -->
+                                <select id="speed-select" class="bg-white/20 text-white border-none rounded-lg px-3 py-2 text-sm cursor-pointer">
+                                    <option value="0.5" class="text-black">0.5x</option>
+                                    <option value="0.75" class="text-black">0.75x</option>
+                                    <option value="1" selected class="text-black">1x</option>
+                                    <option value="1.25" class="text-black">1.25x</option>
+                                    <option value="1.5" class="text-black">1.5x</option>
+                                    <option value="2" class="text-black">2x</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Summary Section -->
+                        <div class="bg-white rounded-2xl p-8 shadow-md mb-8">
+                            <h3 class="font-serif text-2xl font-bold text-text-dark mb-6 flex items-center space-x-3">
+                                <i data-lucide="file-text" class="w-6 h-6 text-primary"></i>
+                                <span>Resumo da Conversa</span>
+                            </h3>
+                            
+                            <div class="prose prose-lg text-text-muted leading-relaxed">
+                                <p class="mb-6">
+                                    Nesta entrevista emocionante, José Roberto Silva compartilha suas memórias de mais de 30 anos dedicados ao IFBA. Ele relembra os primeiros anos como professor de História, os desafios enfrentados na construção de uma educação pública de qualidade e as conquistas que marcaram sua trajetória.
+                                </p>
+                                <p>
+                                    O professor também fala sobre a importância da memória institucional e como a preservação dessas histórias pode inspirar novas gerações de estudantes e educadores.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Highlights Section -->
+                        <div class="bg-white rounded-2xl p-8 shadow-md mb-8">
+                            <h3 class="font-serif text-2xl font-bold text-text-dark mb-6 flex items-center space-x-3">
+                                <i data-lucide="star" class="w-6 h-6 text-accent"></i>
+                                <span>Destaques da Entrevista</span>
+                            </h3>
+                            
+                            <ul class="space-y-4">
+                                <li class="flex items-start space-x-4">
+                                    <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-text-dark font-medium">Chegada ao IFBA e primeiras impressões do campus</p>
+                                        <span class="text-sm text-text-muted">02:15 - 04:30</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start space-x-4">
+                                    <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-text-dark font-medium">Memórias dos alunos e momentos marcantes em sala de aula</p>
+                                        <span class="text-sm text-text-muted">05:00 - 07:45</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start space-x-4">
+                                    <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-text-dark font-medium">A transformação do CEFET em Instituto Federal</p>
+                                        <span class="text-sm text-text-muted">08:20 - 10:15</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start space-x-4">
+                                    <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-text-dark font-medium">Desafios e conquistas durante a gestão como diretor</p>
+                                        <span class="text-sm text-text-muted">11:00 - 13:30</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start space-x-4">
+                                    <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-4 h-4 text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-text-dark font-medium">Mensagem para as futuras gerações de estudantes</p>
+                                        <span class="text-sm text-text-muted">14:00 - 15:30</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Related Interviews -->
+                        <div class="bg-background-alt rounded-2xl p-8">
+                            <h3 class="font-serif text-2xl font-bold text-text-dark mb-6">
+                                Outras Entrevistas
+                            </h3>
+                            
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <!-- Related 1 -->
+                                <a href="interview-detail.html" class="flex items-center space-x-4 bg-white p-4 rounded-xl hover:shadow-md transition-shadow">
+                                    <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&q=80" alt="Maria Helena Santos" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-text-dark">Maria Helena Santos</h4>
+                                        <p class="text-sm text-text-muted">Coordenadora Pedagógica</p>
+                                    </div>
+                                </a>
+                                
+                                <!-- Related 2 -->
+                                <a href="interview-detail.html" class="flex items-center space-x-4 bg-white p-4 rounded-xl hover:shadow-md transition-shadow">
+                                    <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80" alt="Carlos Eduardo Souza" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-text-dark">Carlos Eduardo Souza</h4>
+                                        <p class="text-sm text-text-muted">Ex-aluno • Turma 2010</p>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <a href="interviews.html" class="btn-secondary mt-6 px-6 py-3 rounded-lg font-medium inline-flex items-center space-x-2">
+                                <span>Ver todas as entrevistas</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Main Footer -->
+            <div class="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-serif font-bold text-xl">M</span>
+                        </div>
+                        <div>
+                            <span class="font-serif font-bold text-xl">Memorial</span>
+                            <span class="block text-xs text-white/70 -mt-1">IFBA Virtual</span>
+                        </div>
+                    </a>
+                    <p class="text-white/70 text-sm leading-relaxed">
+                        Um projeto do Núcleo de Arte e Cultura dedicado à preservação da memória institucional do IFBA.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Links Rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="archive.html" class="text-white/70 hover:text-white transition-colors">Acervo Digital</a></li>
+                        <li><a href="about.html" class="text-white/70 hover:text-white transition-colors">Linha do Tempo</a></li>
+                        <li><a href="about.html" class="text-white/70 hover:text-white transition-colors">Sobre o Memorial</a></li>
+                        <li><a href="interviews.html" class="text-white/70 hover:text-white transition-colors">Entrevistas</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Contato</h4>
+                    <ul class="space-y-3 text-white/70 text-sm">
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 mt-0.5 flex-shrink-0"></i>
+                            <span>Rua Emídio dos Santos, S/N<br>Salvador, BA - 40301-015</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="mail" class="w-5 h-5 flex-shrink-0"></i>
+                            <a href="mailto:memorial@ifba.edu.br" class="hover:text-white transition-colors">memorial@ifba.edu.br</a>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="phone" class="w-5 h-5 flex-shrink-0"></i>
+                            <span>(71) 1234-5678</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Institucional</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Acessibilidade</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Termos de Uso</a></li>
+                        <li><a href="donate.html" class="text-white/70 hover:text-white transition-colors">Contribuir</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="py-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm text-white/60">
+                <p>&copy; 2026 Memorial Virtual IFBA. Todos os direitos reservados.</p>
+                <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="youtube" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            offset: 100,
+        });
+        
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Audio Player Logic
+        const audio = document.getElementById('audio-player');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const progressBar = document.getElementById('progress-bar');
+        const currentTimeEl = document.getElementById('current-time');
+        const durationEl = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volume-slider');
+        const volumeIcon = document.getElementById('volume-icon');
+        const muteBtn = document.getElementById('mute-btn');
+        const rewindBtn = document.getElementById('rewind-btn');
+        const forwardBtn = document.getElementById('forward-btn');
+        const speedSelect = document.getElementById('speed-select');
+        
+        let isPlaying = false;
+        
+        // Format time helper
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Play/Pause
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playIcon.setAttribute('data-lucide', 'play');
+            } else {
+                audio.play();
+                playIcon.setAttribute('data-lucide', 'pause');
+            }
+            isPlaying = !isPlaying;
+            lucide.createIcons();
+        });
+        
+        // Update progress bar
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.value = progress;
+            currentTimeEl.textContent = formatTime(audio.currentTime);
+        });
+        
+        // Load duration
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+        
+        // Seek
+        progressBar.addEventListener('input', () => {
+            const time = (progressBar.value / 100) * audio.duration;
+            audio.currentTime = time;
+        });
+        
+        // Volume
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value / 100;
+            updateVolumeIcon();
+        });
+        
+        // Mute
+        muteBtn.addEventListener('click', () => {
+            audio.muted = !audio.muted;
+            updateVolumeIcon();
+        });
+        
+        function updateVolumeIcon() {
+            let iconName = 'volume-2';
+            if (audio.muted || audio.volume === 0) {
+                iconName = 'volume-x';
+            } else if (audio.volume < 0.5) {
+                iconName = 'volume-1';
+            }
+            volumeIcon.setAttribute('data-lucide', iconName);
+            lucide.createIcons();
+        }
+        
+        // Rewind 10s
+        rewindBtn.addEventListener('click', () => {
+            audio.currentTime = Math.max(0, audio.currentTime - 10);
+        });
+        
+        // Forward 10s
+        forwardBtn.addEventListener('click', () => {
+            audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+        });
+        
+        // Playback speed
+        speedSelect.addEventListener('change', () => {
+            audio.playbackRate = parseFloat(speedSelect.value);
+        });
+        
+        // Reset on end
+        audio.addEventListener('ended', () => {
+            isPlaying = false;
+            playIcon.setAttribute('data-lucide', 'play');
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

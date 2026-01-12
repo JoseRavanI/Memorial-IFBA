@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa História - Memorial Virtual IFBA</title>
+    <meta name="description" content="Conheça a história do IFBA através de uma linha do tempo interativa com marcos históricos importantes.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2D5A3D',
+                        'primary-light': '#3D7A52',
+                        'primary-dark': '#1D3A2A',
+                        'accent': '#722F37',
+                        'accent-light': '#8B3A44',
+                        'background': '#FAF8F5',
+                        'background-alt': '#F5F1EB',
+                        'text-dark': '#1A1A1A',
+                        'text-muted': '#666666',
+                        'border-light': '#E0DCD5',
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'Georgia', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- AOS - Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #FAF8F5; }
+        .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+        .btn-primary {
+            background-color: #2D5A3D;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #3D7A52;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 90, 61, 0.4);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid #2D5A3D;
+            color: #2D5A3D;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #2D5A3D;
+            color: white;
+        }
+        .timeline-line {
+            background: linear-gradient(to bottom, #2D5A3D, #3D7A52, #2D5A3D);
+        }
+    </style>
+</head>
+<body class="bg-background text-text-dark">
+    
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
+                        <span class="text-white font-serif font-bold text-xl">M</span>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-xl text-primary">Memorial</span>
+                        <span class="block text-xs text-text-muted -mt-1">IFBA Virtual</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-text-muted hover:text-primary transition-colors">Início</a>
+                    <a href="archive.html" class="text-text-muted hover:text-primary transition-colors">Acervo</a>
+                    <a href="interviews.html" class="text-text-muted hover:text-primary transition-colors">Entrevistas</a>
+                    <a href="about.html" class="text-primary font-medium border-b-2 border-primary pb-1">Sobre</a>
+                    <a href="donate.html" class="text-text-muted hover:text-primary transition-colors">Contribuir</a>
+                </nav>
+                
+                <!-- Login Button -->
+                <div class="hidden md:block">
+                    <a href="#" class="btn-primary px-6 py-2.5 rounded-lg font-medium inline-flex items-center space-x-2">
+                        <i data-lucide="log-in" class="w-4 h-4"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                    <i data-lucide="menu" class="w-6 h-6 text-primary"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-border-light">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block py-2 text-text-muted hover:text-primary">Início</a>
+                <a href="archive.html" class="block py-2 text-text-muted hover:text-primary">Acervo</a>
+                <a href="interviews.html" class="block py-2 text-text-muted hover:text-primary">Entrevistas</a>
+                <a href="about.html" class="block py-2 text-primary font-medium">Sobre</a>
+                <a href="donate.html" class="block py-2 text-text-muted hover:text-primary">Contribuir</a>
+                <a href="#" class="btn-primary px-6 py-2.5 rounded-lg font-medium inline-flex items-center space-x-2 mt-4">
+                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                    <span>Login</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="relative py-24 bg-primary overflow-hidden">
+            <!-- Decorative elements -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+            
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div data-aos="fade-up">
+                    <span class="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-6">
+                        📜 Conheça Nossa Trajetória
+                    </span>
+                    <h1 class="font-serif text-5xl md:text-6xl font-bold text-white mb-6">
+                        Nossa História
+                    </h1>
+                    <p class="text-white/80 text-xl max-w-2xl mx-auto">
+                        Mais de um século dedicado à formação de profissionais e cidadãos comprometidos com o desenvolvimento da Bahia e do Brasil.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="py-24 bg-background">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center mb-20" data-aos="fade-up">
+                    <span class="text-primary font-medium text-sm tracking-wider uppercase">Linha do Tempo</span>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-text-dark mt-4 mb-6">
+                        Marcos Históricos
+                    </h2>
+                    <p class="text-text-muted text-lg max-w-2xl mx-auto">
+                        Conheça os momentos que definiram nossa trajetória e moldaram a instituição que somos hoje.
+                    </p>
+                </div>
+
+                <!-- Timeline -->
+                <div class="relative">
+                    <!-- Vertical Line -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 timeline-line rounded-full hidden md:block"></div>
+                    
+                    <!-- Timeline Items -->
+                    <div class="space-y-16 md:space-y-24">
+                        
+                        <!-- Item 1 - 2006 -->
+                        <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-up">
+                            <!-- Left Content -->
+                            <div class="md:w-1/2 md:pr-16 md:text-right mb-8 md:mb-0">
+                                <span class="text-primary font-serif text-5xl font-bold">2006</span>
+                                <h3 class="font-serif text-2xl font-semibold text-text-dark mt-4 mb-3">
+                                    Criação do IFBA
+                                </h3>
+                                <p class="text-text-muted leading-relaxed">
+                                    O Instituto Federal da Bahia é criado a partir da integração do CEFET-BA, marcando uma nova era na educação profissional e tecnológica do estado.
+                                </p>
+                            </div>
+                            
+                            <!-- Center Dot -->
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-primary rounded-full border-4 border-background hidden md:block z-10"></div>
+                            
+                            <!-- Right Image -->
+                            <div class="md:w-1/2 md:pl-16">
+                                <div class="rounded-2xl overflow-hidden shadow-lg">
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1562774053-701939374585?w=600&q=80" 
+                                        alt="Criação do IFBA em 2006" 
+                                        class="w-full h-64 object-cover"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 - 2008 -->
+                        <div class="relative flex flex-col md:flex-row-reverse items-center" data-aos="fade-up">
+                            <!-- Right Content (now left due to reverse) -->
+                            <div class="md:w-1/2 md:pl-16 md:text-left mb-8 md:mb-0">
+                                <span class="text-primary font-serif text-5xl font-bold">2008</span>
+                                <h3 class="font-serif text-2xl font-semibold text-text-dark mt-4 mb-3">
+                                    Expansão para o Interior
+                                </h3>
+                                <p class="text-text-muted leading-relaxed">
+                                    Início da interiorização com a criação de novos campi em diversas cidades baianas, ampliando o acesso à educação profissional.
+                                </p>
+                            </div>
+                            
+                            <!-- Center Dot -->
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-accent rounded-full border-4 border-background hidden md:block z-10"></div>
+                            
+                            <!-- Left Image -->
+                            <div class="md:w-1/2 md:pr-16">
+                                <div class="rounded-2xl overflow-hidden shadow-lg">
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80" 
+                                        alt="Marco 2008" 
+                                        class="w-full h-64 object-cover"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 - 2010 -->
+                        <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-up">
+                            <!-- Left Content -->
+                            <div class="md:w-1/2 md:pr-16 md:text-right mb-8 md:mb-0">
+                                <span class="text-primary font-serif text-5xl font-bold">2010</span>
+                                <h3 class="font-serif text-2xl font-semibold text-text-dark mt-4 mb-3">
+                                    Novos Cursos Superiores
+                                </h3>
+                                <p class="text-text-muted leading-relaxed">
+                                    Consolidação da oferta de cursos de graduação e pós-graduação, fortalecendo a pesquisa e a formação de profissionais qualificados.
+                                </p>
+                            </div>
+                            
+                            <!-- Center Dot -->
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-primary rounded-full border-4 border-background hidden md:block z-10"></div>
+                            
+                            <!-- Right Image -->
+                            <div class="md:w-1/2 md:pl-16">
+                                <div class="rounded-2xl overflow-hidden shadow-lg">
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80" 
+                                        alt="Marco 2010" 
+                                        class="w-full h-64 object-cover"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 4 - 2015 -->
+                        <div class="relative flex flex-col md:flex-row-reverse items-center" data-aos="fade-up">
+                            <!-- Right Content -->
+                            <div class="md:w-1/2 md:pl-16 md:text-left mb-8 md:mb-0">
+                                <span class="text-primary font-serif text-5xl font-bold">2015</span>
+                                <h3 class="font-serif text-2xl font-semibold text-text-dark mt-4 mb-3">
+                                    Núcleo de Arte e Cultura
+                                </h3>
+                                <p class="text-text-muted leading-relaxed">
+                                    Criação do NAC, dedicado à promoção de atividades culturais e à preservação da memória institucional do IFBA.
+                                </p>
+                            </div>
+                            
+                            <!-- Center Dot -->
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-accent rounded-full border-4 border-background hidden md:block z-10"></div>
+                            
+                            <!-- Left Image -->
+                            <div class="md:w-1/2 md:pr-16">
+                                <div class="rounded-2xl overflow-hidden shadow-lg">
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&q=80" 
+                                        alt="Marco 2015" 
+                                        class="w-full h-64 object-cover"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 5 - 2020 -->
+                        <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-up">
+                            <!-- Left Content -->
+                            <div class="md:w-1/2 md:pr-16 md:text-right mb-8 md:mb-0">
+                                <span class="text-primary font-serif text-5xl font-bold">2020</span>
+                                <h3 class="font-serif text-2xl font-semibold text-text-dark mt-4 mb-3">
+                                    Transformação Digital
+                                </h3>
+                                <p class="text-text-muted leading-relaxed">
+                                    Adaptação ao ensino remoto e aceleração da digitalização de processos, garantindo a continuidade das atividades educacionais.
+                                </p>
+                            </div>
+                            
+                            <!-- Center Dot -->
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-primary rounded-full border-4 border-background hidden md:block z-10"></div>
+                            
+                            <!-- Right Image -->
+                            <div class="md:w-1/2 md:pl-16">
+                                <div class="rounded-2xl overflow-hidden shadow-lg">
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=600&q=80" 
+                                        alt="Marco 2020" 
+                                        class="w-full h-64 object-cover"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 6 - 2024 -->
+                        <div class="relative flex flex-col md:flex-row-reverse items-center" data-aos="fade-up">
+                            <!-- Right Content -->
+                            <div class="md:w-1/2 md:pl-16 md:text-left mb-8 md:mb-0">
+                                <span class="text-primary font-serif text-5xl font-bold">2024</span>
+                                <h3 class="font-serif text-2xl font-semibold text-text-dark mt-4 mb-3">
+                                    Memorial Virtual IFBA
+                                </h3>
+                                <p class="text-text-muted leading-relaxed">
+                                    Lançamento do Memorial Virtual, preservando digitalmente a memória institucional e tornando-a acessível para toda a comunidade.
+                                </p>
+                            </div>
+                            
+                            <!-- Center Dot -->
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-accent rounded-full border-4 border-background hidden md:block z-10"></div>
+                            
+                            <!-- Left Image -->
+                            <div class="md:w-1/2 md:pr-16">
+                                <div class="rounded-2xl overflow-hidden shadow-lg">
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80" 
+                                        alt="Marco 2024" 
+                                        class="w-full h-64 object-cover"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote Section -->
+        <section class="py-24 bg-background-alt">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+                <div class="relative">
+                    <!-- Quote Icon -->
+                    <i data-lucide="quote" class="w-16 h-16 text-primary/20 mx-auto mb-8"></i>
+                    
+                    <!-- Quote Text -->
+                    <blockquote class="font-serif text-3xl md:text-4xl text-text-dark leading-relaxed italic mb-8">
+                        "A educação é o caminho mais seguro para transformar vidas e construir uma sociedade mais justa e igualitária."
+                    </blockquote>
+                    
+                    <!-- Author -->
+                    <div class="flex items-center justify-center space-x-4">
+                        <div class="w-16 h-16 rounded-full overflow-hidden">
+                            <img 
+                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&q=80" 
+                                alt="Autor da citação" 
+                                class="w-full h-full object-cover"
+                            >
+                        </div>
+                        <div class="text-left">
+                            <p class="font-semibold text-text-dark">Prof. Carlos Eduardo</p>
+                            <p class="text-text-muted text-sm">Reitor do IFBA, 2020</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="py-24 bg-background">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Mission -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md" data-aos="fade-up" data-aos-delay="0">
+                        <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="target" class="w-8 h-8 text-primary"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-text-dark mb-4">Missão</h3>
+                        <p class="text-text-muted leading-relaxed">
+                            Preservar, organizar e difundir a memória institucional do IFBA, tornando-a acessível a toda a comunidade acadêmica e à sociedade.
+                        </p>
+                    </div>
+
+                    <!-- Vision -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="eye" class="w-8 h-8 text-accent"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-text-dark mb-4">Visão</h3>
+                        <p class="text-text-muted leading-relaxed">
+                            Ser referência em preservação de memória institucional, conectando gerações através da história e cultura do IFBA.
+                        </p>
+                    </div>
+
+                    <!-- Values -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="heart" class="w-8 h-8 text-primary"></i>
+                        </div>
+                        <h3 class="font-serif text-2xl font-semibold text-text-dark mb-4">Valores</h3>
+                        <p class="text-text-muted leading-relaxed">
+                            Compromisso com a verdade histórica, respeito às memórias individuais e coletivas, e valorização da diversidade cultural.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Main Footer -->
+            <div class="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-serif font-bold text-xl">M</span>
+                        </div>
+                        <div>
+                            <span class="font-serif font-bold text-xl">Memorial</span>
+                            <span class="block text-xs text-white/70 -mt-1">IFBA Virtual</span>
+                        </div>
+                    </a>
+                    <p class="text-white/70 text-sm leading-relaxed">
+                        Um projeto do Núcleo de Arte e Cultura dedicado à preservação da memória institucional do IFBA.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Links Rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="archive.html" class="text-white/70 hover:text-white transition-colors">Acervo Digital</a></li>
+                        <li><a href="about.html" class="text-white/70 hover:text-white transition-colors">Linha do Tempo</a></li>
+                        <li><a href="about.html" class="text-white/70 hover:text-white transition-colors">Sobre o Memorial</a></li>
+                        <li><a href="interviews.html" class="text-white/70 hover:text-white transition-colors">Entrevistas</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Contato</h4>
+                    <ul class="space-y-3 text-white/70 text-sm">
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 mt-0.5 flex-shrink-0"></i>
+                            <span>Rua Emídio dos Santos, S/N<br>Salvador, BA - 40301-015</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="mail" class="w-5 h-5 flex-shrink-0"></i>
+                            <a href="mailto:memorial@ifba.edu.br" class="hover:text-white transition-colors">memorial@ifba.edu.br</a>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="phone" class="w-5 h-5 flex-shrink-0"></i>
+                            <span>(71) 1234-5678</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Institucional</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Acessibilidade</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Termos de Uso</a></li>
+                        <li><a href="donate.html" class="text-white/70 hover:text-white transition-colors">Contribuir</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="py-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm text-white/60">
+                <p>&copy; 2026 Memorial Virtual IFBA. Todos os direitos reservados.</p>
+                <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="youtube" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            offset: 100,
+        });
+        
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

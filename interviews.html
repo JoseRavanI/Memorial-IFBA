@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrevistas - Memorial Virtual IFBA</title>
+    <meta name="description" content="Ouça entrevistas com pessoas que fizeram parte da história do IFBA. Depoimentos e memórias vivas.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#2D5A3D',
+                        'primary-light': '#3D7A52',
+                        'primary-dark': '#1D3A2A',
+                        'accent': '#722F37',
+                        'accent-light': '#8B3A44',
+                        'background': '#FAF8F5',
+                        'background-alt': '#F5F1EB',
+                        'text-dark': '#1A1A1A',
+                        'text-muted': '#666666',
+                        'border-light': '#E0DCD5',
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'Georgia', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- AOS - Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; background-color: #FAF8F5; }
+        .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+        .btn-primary {
+            background-color: #2D5A3D;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #3D7A52;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 90, 61, 0.4);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid #2D5A3D;
+            color: #2D5A3D;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #2D5A3D;
+            color: white;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-text-dark">
+    
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
+                        <span class="text-white font-serif font-bold text-xl">M</span>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-xl text-primary">Memorial</span>
+                        <span class="block text-xs text-text-muted -mt-1">IFBA Virtual</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-text-muted hover:text-primary transition-colors">Início</a>
+                    <a href="archive.html" class="text-text-muted hover:text-primary transition-colors">Acervo</a>
+                    <a href="interviews.html" class="text-primary font-medium border-b-2 border-primary pb-1">Entrevistas</a>
+                    <a href="about.html" class="text-text-muted hover:text-primary transition-colors">Sobre</a>
+                    <a href="donate.html" class="text-text-muted hover:text-primary transition-colors">Contribuir</a>
+                </nav>
+                
+                <!-- Login Button -->
+                <div class="hidden md:block">
+                    <a href="#" class="btn-primary px-6 py-2.5 rounded-lg font-medium inline-flex items-center space-x-2">
+                        <i data-lucide="log-in" class="w-4 h-4"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                    <i data-lucide="menu" class="w-6 h-6 text-primary"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-border-light">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block py-2 text-text-muted hover:text-primary">Início</a>
+                <a href="archive.html" class="block py-2 text-text-muted hover:text-primary">Acervo</a>
+                <a href="interviews.html" class="block py-2 text-primary font-medium">Entrevistas</a>
+                <a href="about.html" class="block py-2 text-text-muted hover:text-primary">Sobre</a>
+                <a href="donate.html" class="block py-2 text-text-muted hover:text-primary">Contribuir</a>
+                <a href="#" class="btn-primary px-6 py-2.5 rounded-lg font-medium inline-flex items-center space-x-2 mt-4">
+                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                    <span>Login</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="py-16 bg-background-alt">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center" data-aos="fade-up">
+                    <span class="text-primary font-medium text-sm tracking-wider uppercase">Vozes da História</span>
+                    <h1 class="font-serif text-4xl md:text-5xl font-bold text-text-dark mt-4 mb-6">
+                        Entrevistas
+                    </h1>
+                    <p class="text-text-muted text-lg max-w-2xl mx-auto">
+                        Conheça as histórias de quem viveu e construiu o IFBA através de depoimentos emocionantes e inspiradores.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interviews Grid -->
+        <section class="py-16 bg-background">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Results Header -->
+                <div class="flex items-center justify-between mb-8">
+                    <p class="text-text-muted">Mostrando <strong class="text-text-dark">6</strong> entrevistas</p>
+                    <select class="px-4 py-2 rounded-lg border border-border-light focus:border-primary outline-none text-sm">
+                        <option>Mais recentes</option>
+                        <option>Mais antigos</option>
+                        <option>A-Z</option>
+                    </select>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Interview Card 1 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="0">
+                        <div class="p-8 text-center">
+                            <!-- Photo -->
+                            <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/20">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80" 
+                                    alt="José Roberto Silva" 
+                                    class="w-full h-full object-cover"
+                                >
+                            </div>
+                            
+                            <!-- Info -->
+                            <h3 class="font-serif text-xl font-semibold text-text-dark mb-2">
+                                José Roberto Silva
+                            </h3>
+                            <p class="text-text-muted text-sm mb-4">
+                                Professor de História • Ex-Diretor
+                            </p>
+                            
+                            <!-- Duration -->
+                            <div class="flex items-center justify-center space-x-2 text-primary mb-6">
+                                <i data-lucide="clock" class="w-4 h-4"></i>
+                                <span class="text-sm font-medium">15:30</span>
+                            </div>
+                            
+                            <!-- Button -->
+                            <a href="interview-detail.html" class="btn-primary px-6 py-3 rounded-lg font-medium inline-flex items-center space-x-2 w-full justify-center">
+                                <i data-lucide="play" class="w-4 h-4"></i>
+                                <span>Ouvir Entrevista</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Interview Card 2 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="100">
+                        <div class="p-8 text-center">
+                            <!-- Photo -->
+                            <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/20">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&q=80" 
+                                    alt="Dolor Amet" 
+                                    class="w-full h-full object-cover"
+                                >
+                            </div>
+                            
+                            <!-- Info -->
+                            <h3 class="font-serif text-xl font-semibold text-text-dark mb-2">
+                                Maria Helena Santos
+                            </h3>
+                            <p class="text-text-muted text-sm mb-4">
+                                Coordenadora Pedagógica • 20 anos de IFBA
+                            </p>
+                            
+                            <!-- Duration -->
+                            <div class="flex items-center justify-center space-x-2 text-primary mb-6">
+                                <i data-lucide="clock" class="w-4 h-4"></i>
+                                <span class="text-sm font-medium">22:45</span>
+                            </div>
+                            
+                            <!-- Button -->
+                            <a href="interview-detail.html" class="btn-primary px-6 py-3 rounded-lg font-medium inline-flex items-center space-x-2 w-full justify-center">
+                                <i data-lucide="play" class="w-4 h-4"></i>
+                                <span>Ouvir Entrevista</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Interview Card 3 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="200">
+                        <div class="p-8 text-center">
+                            <!-- Photo -->
+                            <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/20">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" 
+                                    alt="Carlos Eduardo Souza" 
+                                    class="w-full h-full object-cover"
+                                >
+                            </div>
+                            
+                            <!-- Info -->
+                            <h3 class="font-serif text-xl font-semibold text-text-dark mb-2">
+                                Carlos Eduardo Souza
+                            </h3>
+                            <p class="text-text-muted text-sm mb-4">
+                                Ex-aluno • Turma de 2010
+                            </p>
+                            
+                            <!-- Duration -->
+                            <div class="flex items-center justify-center space-x-2 text-primary mb-6">
+                                <i data-lucide="clock" class="w-4 h-4"></i>
+                                <span class="text-sm font-medium">18:20</span>
+                            </div>
+                            
+                            <!-- Button -->
+                            <a href="interview-detail.html" class="btn-primary px-6 py-3 rounded-lg font-medium inline-flex items-center space-x-2 w-full justify-center">
+                                <i data-lucide="play" class="w-4 h-4"></i>
+                                <span>Ouvir Entrevista</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Interview Card 4 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="300">
+                        <div class="p-8 text-center">
+                            <!-- Photo -->
+                            <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/20">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" 
+                                    alt="Ana Paula Oliveira" 
+                                    class="w-full h-full object-cover"
+                                >
+                            </div>
+                            
+                            <!-- Info -->
+                            <h3 class="font-serif text-xl font-semibold text-text-dark mb-2">
+                                Ana Paula Oliveira
+                            </h3>
+                            <p class="text-text-muted text-sm mb-4">
+                                Técnica Administrativa • Fundadora
+                            </p>
+                            
+                            <!-- Duration -->
+                            <div class="flex items-center justify-center space-x-2 text-primary mb-6">
+                                <i data-lucide="clock" class="w-4 h-4"></i>
+                                <span class="text-sm font-medium">28:15</span>
+                            </div>
+                            
+                            <!-- Button -->
+                            <a href="interview-detail.html" class="btn-primary px-6 py-3 rounded-lg font-medium inline-flex items-center space-x-2 w-full justify-center">
+                                <i data-lucide="play" class="w-4 h-4"></i>
+                                <span>Ouvir Entrevista</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Interview Card 5 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="400">
+                        <div class="p-8 text-center">
+                            <!-- Photo -->
+                            <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/20">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80" 
+                                    alt="Roberto Pereira Costa" 
+                                    class="w-full h-full object-cover"
+                                >
+                            </div>
+                            
+                            <!-- Info -->
+                            <h3 class="font-serif text-xl font-semibold text-text-dark mb-2">
+                                Roberto Pereira Costa
+                            </h3>
+                            <p class="text-text-muted text-sm mb-4">
+                                Professor de Matemática • Aposentado
+                            </p>
+                            
+                            <!-- Duration -->
+                            <div class="flex items-center justify-center space-x-2 text-primary mb-6">
+                                <i data-lucide="clock" class="w-4 h-4"></i>
+                                <span class="text-sm font-medium">12:50</span>
+                            </div>
+                            
+                            <!-- Button -->
+                            <a href="interview-detail.html" class="btn-primary px-6 py-3 rounded-lg font-medium inline-flex items-center space-x-2 w-full justify-center">
+                                <i data-lucide="play" class="w-4 h-4"></i>
+                                <span>Ouvir Entrevista</span>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Interview Card 6 -->
+                    <article class="card-hover bg-white rounded-2xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="500">
+                        <div class="p-8 text-center">
+                            <!-- Photo -->
+                            <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary/20">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80" 
+                                    alt="Fernanda Lima Almeida" 
+                                    class="w-full h-full object-cover"
+                                >
+                            </div>
+                            
+                            <!-- Info -->
+                            <h3 class="font-serif text-xl font-semibold text-text-dark mb-2">
+                                Fernanda Lima Almeida
+                            </h3>
+                            <p class="text-text-muted text-sm mb-4">
+                                Ex-aluna • Pesquisadora
+                            </p>
+                            
+                            <!-- Duration -->
+                            <div class="flex items-center justify-center space-x-2 text-primary mb-6">
+                                <i data-lucide="clock" class="w-4 h-4"></i>
+                                <span class="text-sm font-medium">20:00</span>
+                            </div>
+                            
+                            <!-- Button -->
+                            <a href="interview-detail.html" class="btn-primary px-6 py-3 rounded-lg font-medium inline-flex items-center space-x-2 w-full justify-center">
+                                <i data-lucide="play" class="w-4 h-4"></i>
+                                <span>Ouvir Entrevista</span>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center items-center space-x-2 mt-12">
+                    <button class="p-2 rounded-lg border border-border-light hover:border-primary hover:text-primary transition-colors" disabled>
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    <button class="w-10 h-10 rounded-lg bg-primary text-white font-medium">1</button>
+                    <button class="w-10 h-10 rounded-lg border border-border-light hover:border-primary hover:text-primary transition-colors font-medium">2</button>
+                    <button class="p-2 rounded-lg border border-border-light hover:border-primary hover:text-primary transition-colors">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 bg-accent">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div data-aos="fade-up">
+                    <i data-lucide="mic" class="w-12 h-12 text-white/80 mx-auto mb-4"></i>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">
+                        Quer compartilhar sua história?
+                    </h2>
+                    <p class="text-white/80 text-lg mb-8">
+                        Se você fez parte da história do IFBA, adoraríamos ouvir suas memórias e experiências.
+                    </p>
+                    <a href="donate.html" class="bg-white text-accent px-8 py-3.5 rounded-xl font-semibold inline-flex items-center space-x-2 hover:bg-background-alt transition-all">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        <span>Contribuir com o Acervo</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Main Footer -->
+            <div class="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-serif font-bold text-xl">M</span>
+                        </div>
+                        <div>
+                            <span class="font-serif font-bold text-xl">Memorial</span>
+                            <span class="block text-xs text-white/70 -mt-1">IFBA Virtual</span>
+                        </div>
+                    </a>
+                    <p class="text-white/70 text-sm leading-relaxed">
+                        Um projeto do Núcleo de Arte e Cultura dedicado à preservação da memória institucional do IFBA.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Links Rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="archive.html" class="text-white/70 hover:text-white transition-colors">Acervo Digital</a></li>
+                        <li><a href="about.html" class="text-white/70 hover:text-white transition-colors">Linha do Tempo</a></li>
+                        <li><a href="about.html" class="text-white/70 hover:text-white transition-colors">Sobre o Memorial</a></li>
+                        <li><a href="interviews.html" class="text-white/70 hover:text-white transition-colors">Entrevistas</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Contato</h4>
+                    <ul class="space-y-3 text-white/70 text-sm">
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 mt-0.5 flex-shrink-0"></i>
+                            <span>Rua Emídio dos Santos, S/N<br>Salvador, BA - 40301-015</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="mail" class="w-5 h-5 flex-shrink-0"></i>
+                            <a href="mailto:memorial@ifba.edu.br" class="hover:text-white transition-colors">memorial@ifba.edu.br</a>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i data-lucide="phone" class="w-5 h-5 flex-shrink-0"></i>
+                            <span>(71) 1234-5678</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Legal -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-6">Institucional</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Acessibilidade</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-white/70 hover:text-white transition-colors">Termos de Uso</a></li>
+                        <li><a href="donate.html" class="text-white/70 hover:text-white transition-colors">Contribuir</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="py-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm text-white/60">
+                <p>&copy; 2026 Memorial Virtual IFBA. Todos os direitos reservados.</p>
+                <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="hover:text-white transition-colors">
+                        <i data-lucide="youtube" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            once: true,
+            offset: 100,
+        });
+        
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
